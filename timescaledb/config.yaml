@@ -1,34 +1,36 @@
 name: TimescaleDB
 version: 5.2.0
 slug: timescaledb
-description: An open-source database built on PostgreSQL for analyzing time-series
+description:
+  An open-source database built on PostgreSQL for analyzing time-series
   data with the power and convenience of SQL
 url: https://github.com/eugenechen0514/hassos-addon-timescaledb
 codenotary: hans@expaso.nl
 arch:
-- armhf
-- aarch64
-- amd64
-- armv7
-- i386
+  - armhf
+  - aarch64
+  - amd64
+  - armv7
+  - i386
 startup: system
 init: false
 tmpfs: true
 map:
-- share:rw
-- backup:rw
-- media:rw
+  - share:rw
+  - backup:rw
+  - media:rw
 timeout: 60
 ports:
   5432/tcp: null
 ports_description:
-  5432/tcp: PostgreSQL Port. Beware! This port may already be in use. Choose another
+  5432/tcp:
+    PostgreSQL Port. Beware! This port may already be in use. Choose another
     port-number if the add-on won't start.
 options:
   databases:
-  - homeassistant
+    - homeassistant
   timescale_enabled:
-  - homeassistant
+    - homeassistant
   timescaledb:
     telemetry: basic
     maxmemory: 512MB
@@ -39,17 +41,18 @@ options:
   retry_upgrade: false
 schema:
   databases:
-  - str
+    - str
   timescale_enabled:
-  - str
+    - str
   timescaledb:
     telemetry: list(off|basic)
     maxmemory: str?
     maxcpus: int(1,)?
   max_connections: int(20,)
   system_packages:
-  - str
+    - str
   init_commands:
-  - str
+    - str
   retry_upgrade: bool?
-image: ghcr.io/expaso/timescaledb/{arch}
+# image: ghcr.io/expaso/timescaledb/{arch}
+image: docker.io/eugenechen0514/timescaledb-{arch}
